@@ -1,0 +1,19 @@
+# Ignore virtual environment
+venv/
+
+# Python files
+*.pyc
+__pycache__/
+
+# Django DB and other sensitive files
+*.sqlite3
+db.sqlite3
+.env
+
+# IDE/editor settings
+.vscode/
+.idea/
+
+# Django static & media
+/staticfiles/
+/media/

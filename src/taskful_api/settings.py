@@ -14,6 +14,9 @@ import os
 import environ
 from pathlib import Path
 
+import rest_framework
+import rest_framework.authentication
+
 #Intialize Environ
 env = environ.Env()
 env.read_env()
@@ -109,6 +112,11 @@ AUTH_PASSWORD_VALIDATORS = [
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES':[
         'rest_framework.permissions.IsAuthenticatedOrReadOnly'
+    ],
+    'DEFAULT_AUTHENTICATION_CLASSES':[
+    #Rest Framework Authentication Classes
+    'rest_framework.authentication.BasicAuthentication',
+    'rest_framework.authentication.SessionAuthentication',
     ]
 }
 

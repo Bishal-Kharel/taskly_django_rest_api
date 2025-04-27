@@ -47,7 +47,10 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "users.apps.UsersConfig",
-    "rest_framework"
+    "rest_framework",
+    "oauth2_provider",
+    "social_django",
+    "rest_framework_social_oauth2"
 ]
 
 MIDDLEWARE = [
@@ -72,6 +75,8 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+                "social_django.context_processors.backends",
+                "social_django.context_processors.login_redirect"
             ],
         },
     },
@@ -115,10 +120,23 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_AUTHENTICATION_CLASSES':[
     #Rest Framework Authentication Classes
-    'rest_framework.authentication.BasicAuthentication',
     'rest_framework.authentication.SessionAuthentication',
+    'rest_framework.authentication.BasicAuthentication',
+
+    
+    #OAUTH2 Authentication Classes
+    'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
+    'rest_framework_social_oauth2.authentication.SocialAuthentication'
     ]
 }
+
+AUTHENTICATION_BACKENDS = (
+    # Django
+    'django.contrib.auth.backends.ModelBackend',
+    
+    # DRF Social OAuth2
+    # 'rest_framework_social_oauth2.backends.DjangoOAuth2',
+)
 
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
@@ -141,3 +159,4 @@ STATIC_URL = "static/"
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
